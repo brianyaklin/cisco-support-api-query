@@ -2,15 +2,15 @@
 
 This module provides an interface for authenticating against the Cisco
 Support API. You will require a valid client ID and secret. Once
-authenticated, you can use the url_headers attribute for querying
-the various support API's.
+authenticated, you can use the auth_token attribute for querying
+the various support API end-points.
 
     Typical usage example:
 
     api = ApiLogin("my_client_key", "my_client_secret")
-    SupportApiX(api.url_headers, additional_parameters)
+    SupportApiX(api.auth_token, additional_parameters)
     api.auth_still_valid()
-    SupportApiY(api.url_headers, additional_parameters)
+    SupportApiY(api.auth_token, additional_parameters)
 
 """
 
@@ -53,6 +53,11 @@ class ApiLogin():
                 access token and token type. An example:
 
                 'Bearer 0123456789abcdef'
+        
+        Raises:
+            requests.exceptions.HTTPError: An HTTP errors occured when querying
+                the API. Usually a 4xx client error or 5xx server error
+                response
         """
         self.auth_token = None
         self.auth_start = time.time()
