@@ -28,20 +28,31 @@ def main():
 
     FNAME = 'eox_report.csv'
     with open(FNAME, mode='w') as fhand:
-        fieldnames = ['EOLProductID', 'ProductIDDescription',
-                      'ProductBulletinNumber', 'LinkToProductBulletinURL',
-                      'EndOfSWMaintenanceReleases',
-                      'EOXExternalAnnouncementDate', 'EndOfSaleDate',
-                      'EndOfSecurityVulSupportDate',
-                      'EndOfRoutineFailureAnalysisDate',
-                      'EndOfServiceContractRenewal', 'LastDateOfSupport',
-                      'EndOfSvcAttachDate', 'UpdatedTimeStamp',
-                      'EOXMigrationDetails', 'EOXInputType',
-                      'EOXInputValue']
-        writer = csv.DictWriter(fhand, fieldnames=fieldnames)
-        writer.writeheader()
+        writer = csv.writer(fhand, delimiter=',', quotechar='"',
+                            quoting=csv.QUOTE_MINIMAL)
+        writer.writerow(['EOLProductID',
+                         'ProductIDDescription',
+                         'LastDateOfSupport',
+                         'EndOfSWMaintenanceReleases',
+                         'EOXExternalAnnouncementDate',
+                         'EndOfSaleDate',
+                         'EndOfSecurityVulSupportDate',
+                         'EndOfRoutineFailureAnalysisDate',
+                         'EndOfServiceContractRenewal',
+                         'EndOfSvcAttachDate',
+                         'LinkToProductBulletinURL', ])
         for record in eox.records:
-            writer.writerow(record)
+            writer.writerow([record['EOLProductID'],
+                             record['ProductIDDescription'],
+                             record['LastDateOfSupport']['value'],
+                             record['EndOfSWMaintenanceReleases']['value'],
+                             record['EOXExternalAnnouncementDate']['value'],
+                             record['EndOfSaleDate']['value'],
+                             record['EndOfSecurityVulSupportDate']['value'],
+                             record['EndOfRoutineFailureAnalysisDate']['value'],
+                             record['EndOfServiceContractRenewal']['value'],
+                             record['EndOfSvcAttachDate']['value'],
+                             record['LinkToProductBulletinURL'], ])
 
     print(f'EOX records written to file {FNAME}')
 
