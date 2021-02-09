@@ -64,7 +64,8 @@ class ApiEox():
         """
         req = requests.get(
             url,
-            headers=self.url_headers
+            headers=self.url_headers,
+            timeout=10,
         )
         req.raise_for_status()
         return req.json()

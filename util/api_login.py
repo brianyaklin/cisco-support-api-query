@@ -72,6 +72,7 @@ class ApiLogin():
         req = requests.post(
             SSO_URL,
             params=params,
+            timeout=10,
         )
         req.raise_for_status()
 
