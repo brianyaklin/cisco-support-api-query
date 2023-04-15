@@ -92,7 +92,7 @@ class ApiEox():
 
         self.items = list({pid for pid in pids if pid.lower() not in BLACK_LIST})
 
-        API_URL = 'https://api.cisco.com/supporttools/eox/rest/5/EOXByProductID/{}/{}'
+        API_URL = 'https://apix.cisco.com/supporttools/eox/rest/5/EOXByProductID/{}/{}'
 
         start_index = 0
         end_index = MAX_ITEMS
