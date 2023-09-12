@@ -61,7 +61,7 @@ class ApiLogin():
         """
         self.auth_token = None
         self.auth_start = time.time()
-        SSO_URL = 'https://cloudsso.cisco.com/as/token.oauth2'
+        SSO_URL = 'https://id.cisco.com/oauth2/default/v1/token'
 
         params = {
             'grant_type': 'client_credentials',
@@ -71,7 +71,7 @@ class ApiLogin():
 
         req = requests.post(
             SSO_URL,
-            params=params,
+            data=params,
             timeout=10,
         )
         req.raise_for_status()
